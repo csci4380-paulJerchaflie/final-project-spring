@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,6 +54,12 @@ public class CatRestController {
 		return catRepository.findById(savedCat.getPetId());
 	}
 	
+	@PutMapping("")
+	public  Optional<Cat> put(@RequestBody final Cat cat) {
+		Cat savedCat = catRepository.save(cat);
+		return catRepository.findById(savedCat.getPetId());
+	}
+	
 	@GetMapping("/petId/{petId}")
 	public  Optional<List<Cat>> findByPetId(@PathVariable Integer petId) {
 		Optional<List<Cat>> cats = catRepository.findByPetId(petId);
@@ -65,7 +72,7 @@ public class CatRestController {
 		return cats;
 	}
 	
-	@DeleteMapping("petId/{petId}")
+	@DeleteMapping("/{petId}")
 	public  void deleteById(@PathVariable("petId") Integer Id) {
 		catRepository.deleteById(Id);
 	}

@@ -102,5 +102,19 @@ public class DogRestController {
 		return dogs;
 	}
 	
+	
+	@GetMapping("/findByTypeQuery/{dogType}")
+	public  Optional<List<Dog>> findByTypeQuery(@PathVariable String dogType) {
+		Optional<List<Dog>> dogs = dogRepository.findByTypeQuery(dogType);
+		return dogs;
+	}
+	
+	@GetMapping("/byNameOrOwnerName/{name}/{ownerName}")
+	public  Optional<List<Dog>> findByNameOrOwnerName(@PathVariable String name,@PathVariable String ownerName) {
+		Optional<List<Dog>> dogs = dogRepository.findByNameOrOwnerName(name,ownerName);
+		return dogs;
+	}
+	
+	
 }
 

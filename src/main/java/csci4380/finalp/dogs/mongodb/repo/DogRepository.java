@@ -22,7 +22,7 @@ public interface DogRepository extends MongoRepository<Dog, String> {
 	public void deleteByPetId(Integer petId);
 	
 	public Optional<List<Dog>> findByTypeAllIgnoreCase(@Param("type") String dogType);
-	
+	public Optional<List<Dog>> findByNameOrOwnerName(String name, String ownerName);
 	
 	@Query("{}")
 	public List<Dog> findMyAll();
@@ -32,5 +32,8 @@ public interface DogRepository extends MongoRepository<Dog, String> {
 	public List<Dog> findMyByNameRegexp(String regexp);
 	@Query("{'age': {$gt: ?0, $lt: ?1}}")
 	public List<Dog> findMyByAgeBetween(int ageGT, int ageLT);
+	@Query("{'type': ?0}")
+	public Optional<List<Dog>> findByTypeQuery(String dogType);
+
 	
 }
